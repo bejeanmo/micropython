@@ -8,8 +8,10 @@ include $(TOP)/extmod/extmod.mk
 # Set CFLAGS and libraries.
 CFLAGS += -I. -I$(BUILD) -I$(TOP) -IInclude -maccumulate-outgoing-args -mno-red-zone -Wno-address -mcmodel=small -fpie -fno-asynchronous-unwind-tables -Wno-address  -fno-omit-frame-pointer
 LIBS += -lm
-LDFLAGS += -nostdlib -static -Wl,-n,-q,--gc-sections -z common-page-size=0x40 -Wl,--whole-archive -Wl,--entry SecStartup -Os -flto -Wl,--script=GccBase.lds
-LDFLAGSx64 = -Wl,-melf_x86_64,--oformat=elf64-x86-64,-pie -Wl,--defsym=PECOFF_HEADER_SIZE=0x228 -Wl,-Ttext=0x00800000
+#LDFLAGS += -nostdlib -static -Wl,-n,-q,--gc-sections -z common-page-size=0x40 -Wl,--whole-archive -Wl,--entry SecStartup -Os -flto -Wl,--script=GccBase.lds
+LDFLAGS += -nostdlib -static -Wl,-n,-q,--gc-sections -z common-page-size=0x40 -Wl,--whole-archive -Wl,--entry SecStartup -Os -flto
+#LDFLAGSx64 = -Wl,-melf_x86_64,--oformat=elf64-x86-64,-pie -Wl,--defsym=PECOFF_HEADER_SIZE=0x228 -Wl,-Ttext=0x00800000
+LDFLAGSx64 = -Wl,-melf_x86_64,--oformat=elf64-x86-64
 LDFLAGSia32 = -Wl,-m,elf_i386,--oformat=elf32-i386 -no-pie -Wl,--defsym=PECOFF_HEADER_SIZE=0x220 -Wl,-Ttext=0x00800000
 
 # Define the required source files.
